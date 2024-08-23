@@ -14,44 +14,43 @@ import { MatButtonModule } from '@angular/material/button';
   selector: 'app-vehicle-dialog',
   standalone: true,
   imports: [
-    FormsModule,
-    ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
     MatOptionModule,
     NgForOf,
     MatDialogModule,
-    MatButtonModule
+    MatButtonModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   templateUrl: './vehicle-dialog.component.html',
-  styleUrl: './vehicle-dialog.component.scss'
+  styleUrls: ['./vehicle-dialog.component.scss']
 })
 export class VehicleDialogComponent {
-    form: FormGroup;
-    estatusOptions: string[] = ['ACTIVO', 'INACTIVO'];
-  
-    constructor(
-      private fb: FormBuilder,
-      private dialogRef: MatDialogRef<VehicleDialogComponent>,
-      @Inject(MAT_DIALOG_DATA) public data: Vehicle
-    ) {
-      this.form = this.fb.group({
-        vin: [data?.vin || '', Validators.required],
-        placa: [data?.placa || '', Validators.required],
-        modelo: [data?.modelo || '', Validators.required],
-        estatus: [data?.estatus || 'ACTIVO', Validators.required]
-      });
-    }
-  
-    onSave(): void {
-      if (this.form.valid) {
-        this.dialogRef.close(this.form.value);
-      }
-    }
-  
-    onCancel(): void {
-      this.dialogRef.close();
-    }
+  form: FormGroup;
+  estatusOptions: string[] = ['ACTIVO', 'INACTIVO'];
 
+  constructor(
+    private fb: FormBuilder,
+    private dialogRef: MatDialogRef<VehicleDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: Vehicle | null // Hace que data sea opcional
+  ) {
+    this.form = this.fb.group({
+      vin: [data?.vin || '', Validators.required],
+      placa: [data?.placa || '', Validators.required],
+      modelo: [data?.modelo || '', Validators.required],
+      estatus: [data?.estatus || 'ACTIVO', Validators.required]
+    });
+  }
+
+  onSave(): void {
+    if (this.form.valid) {
+      this.dialogRef.close(this.form.value);
+    }
+  }
+
+  onCancel(): void {
+    this.dialogRef.close();
+  }
 }

@@ -1,31 +1,36 @@
-<h1 mat-dialog-title>{{data.id ? 'Edit Vehicle' : 'Add Vehicle'}}</h1>
-<div mat-dialog-content style="display: flex; justify-content: center; gap: 10px;">
+<h1 mat-dialog-title>{{ data ? 'Edit Vehicle' : 'Add Vehicle' }}</h1>
 
-  <form [formGroup]="form">
-    <mat-form-field appearance="fill">
+<div mat-dialog-content>
+  <form [formGroup]="form" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px;">
+    
+    <mat-form-field appearance="outline">
       <mat-label>VIN</mat-label>
       <input matInput formControlName="vin">
     </mat-form-field>
 
-    <mat-form-field appearance="fill">
+    <mat-form-field appearance="outline">
       <mat-label>Placa</mat-label>
       <input matInput formControlName="placa">
     </mat-form-field>
 
-    <mat-form-field appearance="fill">
+    <mat-form-field appearance="outline">
       <mat-label>Modelo</mat-label>
       <input matInput formControlName="modelo">
     </mat-form-field>
 
-    <mat-form-field appearance="fill">
+    <mat-form-field appearance="outline">
       <mat-label>Estatus</mat-label>
       <mat-select formControlName="estatus">
-        <mat-option *ngFor="let estatus of estatusOptions" [value]="estatus">{{estatus}}</mat-option>
+        <mat-option *ngFor="let estatus of estatusOptions" [value]="estatus">
+          {{ estatus }}
+        </mat-option>
       </mat-select>
     </mat-form-field>
+
   </form>
 </div>
-<div mat-dialog-actions>
+
+<div mat-dialog-actions align="end">
   <button mat-button (click)="onCancel()">Cancel</button>
-  <button mat-button (click)="onSave()">Save</button>
+  <button mat-button color="primary" (click)="onSave()">Save</button>
 </div>
