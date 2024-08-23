@@ -1,0 +1,31 @@
+<h1 mat-dialog-title>{{data.id ? 'Edit Vehicle' : 'Add Vehicle'}}</h1>
+<div mat-dialog-content style="display: flex; justify-content: center; gap: 10px;">
+
+  <form [formGroup]="form">
+    <mat-form-field appearance="fill">
+      <mat-label>VIN</mat-label>
+      <input matInput formControlName="vin">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Placa</mat-label>
+      <input matInput formControlName="placa">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Modelo</mat-label>
+      <input matInput formControlName="modelo">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Estatus</mat-label>
+      <mat-select formControlName="estatus">
+        <mat-option *ngFor="let estatus of estatusOptions" [value]="estatus">{{estatus}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onCancel()">Cancel</button>
+  <button mat-button (click)="onSave()">Save</button>
+</div>
